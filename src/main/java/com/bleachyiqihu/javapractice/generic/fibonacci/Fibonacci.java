@@ -1,5 +1,7 @@
 package com.bleachyiqihu.javapractice.generic.fibonacci;
 
+import com.bleachyiqihu.javapractice.generic.Generator;
+
 /**
  * 斐波那契数列的生成器
  * <p>

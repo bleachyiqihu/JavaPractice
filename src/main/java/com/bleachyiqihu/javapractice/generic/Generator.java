@@ -1,4 +1,4 @@
-package com.bleachyiqihu.javapractice.generic.fibonacci;
+package com.bleachyiqihu.javapractice.generic;
 
 /**
  * 生成器接口

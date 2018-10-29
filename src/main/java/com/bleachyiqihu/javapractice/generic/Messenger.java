@@ -10,11 +10,11 @@ package com.bleachyiqihu.javapractice.generic;
 public class Messenger<T, U, K> {
     // 对于信使来说，使用方只能获取持有对象并随意使用，却无法修改
     // 信使本身的意义是传递数据
-    public final T first;
-    public final U second;
-    public final K third;
+     private final T first;
+    private final U second;
+    private final K third;
 
-    public Messenger(T first, U second, K third) {
+    private Messenger(T first, U second, K third) {
         this.first = first;
         this.second = second;
         this.third = third;

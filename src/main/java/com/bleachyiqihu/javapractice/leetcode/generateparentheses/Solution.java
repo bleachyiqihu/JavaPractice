@@ -9,21 +9,25 @@ public class Solution {
         if (n < 1) {
             return resultList;
         }
-        recur("(", 1, 1, n, resultList);
+        char[] levelArr = new char[n * 2];
+        levelArr[0] = '(';
+        recur(levelArr, 1, 1, n, 1, resultList);
         return resultList;
     }
 
-    private void recur(String levelStr, int usedLeftCount, int unmatchedLeftCount, int n, List<String> resultList) {
-        if(levelStr.length() == n * 2) {
-            resultList.add(levelStr);
+    private void recur(char[] levelArr, int usedLeftCount, int unmatchedLeftCount, int n, int pos, List<String> resultList) {
+        if(pos == n * 2) {
+            resultList.add(String.valueOf(levelArr));
             return;
         }
         if(usedLeftCount < n) {
-            recur(levelStr + "(", usedLeftCount + 1, unmatchedLeftCount+1, n, resultList);
+            levelArr[pos] = '(';
+            recur(levelArr, usedLeftCount+1, unmatchedLeftCount+1, n, pos+1, resultList);
         }
 
         if(unmatchedLeftCount > 0) {
-            recur(levelStr + ")", usedLeftCount, unmatchedLeftCount-1, n, resultList);
+            levelArr[pos] = ')';
+            recur(levelArr, usedLeftCount, unmatchedLeftCount-1, n, pos+1, resultList);
         }
     }
 }

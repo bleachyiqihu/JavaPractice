@@ -3,12 +3,12 @@ package com.bleachyiqihu.javapractice.leetcode.sudoku;
 /**
  * Created by Paul on 2019-03-02
  */
-public class Solution2 {
+class Solution2 {
     void solveSudoku(char[][] board) {
 
         boolean[][] row = new boolean[9][10];
         boolean[][] col = new boolean[9][10];
-        boolean[][] suduku = new boolean[9][10];
+        boolean[][] sudoku = new boolean[9][10];
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -16,11 +16,11 @@ public class Solution2 {
                     int num = board[i][j] - '0';
                     row[i][num] = true;
                     col[j][num] = true;
-                    suduku[(i / 3) * 3 + j / 3][num] = true;
+                    sudoku[(i / 3) * 3 + j / 3][num] = true;
                 }
             }
         }
-        dfs(board, row, col, suduku, 0, 0);
+        dfs(board, row, col, sudoku, 0, 0);
     }
 
     private boolean dfs(char[][] board, boolean[][] row, boolean[][] col, boolean[][] sudoku, int i, int j) {

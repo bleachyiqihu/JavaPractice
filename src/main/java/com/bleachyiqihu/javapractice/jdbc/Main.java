@@ -6,6 +6,6 @@ package com.bleachyiqihu.javapractice.jdbc;
 public class Main {
     public static void main(String[] args) {
         QueryMySql queryMySql = new QueryMySql();
-        System.out.println(queryMySql.select(1));
+        System.out.println(queryMySql.selectAndUpdate(1));
     }
 }

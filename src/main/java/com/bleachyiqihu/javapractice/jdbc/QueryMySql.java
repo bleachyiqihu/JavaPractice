@@ -25,7 +25,7 @@ class QueryMySql {
         }
     }
 
-    String select(Integer id) {
+    String selectAndUpdate(Integer id) {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -34,12 +34,14 @@ class QueryMySql {
             conn = DriverManager.getConnection(URL, USER, PWD);
 
             System.out.println("Creating statement...");
-            stmt = conn.createStatement();
+            stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             String sql = String.format("select * from jdbc_test where id = %s", id);
             rs = stmt.executeQuery(sql);
             List<String> nameList = new ArrayList<>();
             while (rs.next()) {
                 String name = rs.getString("name");
+                rs.updateString("name", "wuguan");
+                rs.updateRow();
                 nameList.add(name);
             }
             rs.close();
@@ -57,7 +59,7 @@ class QueryMySql {
                 }
             }
 
-            if(conn != null) {
+            if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException e) {
@@ -65,7 +67,7 @@ class QueryMySql {
                 }
             }
 
-            if(rs != null) {
+            if (rs != null) {
                 try {
                     rs.close();
                 } catch (SQLException e) {

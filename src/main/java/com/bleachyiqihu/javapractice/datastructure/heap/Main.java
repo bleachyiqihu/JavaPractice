@@ -1,5 +1,9 @@
 package com.bleachyiqihu.javapractice.datastructure.heap;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /**
  * @Author wuguan
  * @Date 2019/6/9 10:46
@@ -24,5 +28,11 @@ public class Main {
         }
         System.out.println();
         System.out.print(heapSort.getSwapCount());
+        System.out.println();
+
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        queue.offer(5);
+        queue.offer(10);
+        System.out.println(queue.peek());
     }
 }

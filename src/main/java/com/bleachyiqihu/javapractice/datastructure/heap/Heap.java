@@ -31,7 +31,7 @@ class Heap {
         if (count < 1) {
             return;
         }
-        swap(a, 1, count);
+        a[1] = a[count];
         count--;
         new HeapSort().heapify(a, 1, count);
     }

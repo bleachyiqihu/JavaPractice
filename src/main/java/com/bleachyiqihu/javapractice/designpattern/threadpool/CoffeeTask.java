@@ -4,7 +4,7 @@ class CoffeeTask extends Task {
 
     private static final int COFFEE_WORK_UNIT = 200;
 
-    public CoffeeTask(int coffeeNum) {
+    CoffeeTask(int coffeeNum) {
         super(coffeeNum * COFFEE_WORK_UNIT);
     }
 

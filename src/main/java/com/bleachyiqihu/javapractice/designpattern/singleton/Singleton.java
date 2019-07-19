@@ -1,4 +1,4 @@
-package com.ctrip.ops.app.designpattern.singleton;
+package com.bleachyiqihu.javapractice.designpattern.singleton;
 
 /**
  * Created by Paul on 2017-09-15

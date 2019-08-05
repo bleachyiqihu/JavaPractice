@@ -1,40 +1,39 @@
 package com.bleachyiqihu.javapractice.datastructure.sort;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by Paul on 2018-11-26
  */
 public class BubbleSort {
-    public static void main(String[] args) throws IOException {
-        List<Integer> list = new LinkedList<>();
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        String s;
-        while((s = in.readLine()) != null && !"".equals(s)) {
-                list.add(Integer.valueOf(s));
+
+    public static void main(String[] args) {
+        BubbleSort bubbleSort = new BubbleSort();
+        int[] a = {5, 4, 6, 9, 9};
+        bubbleSort.sort(a, a.length);
+        for (int n : a) {
+            System.out.print(n + "\t");
         }
-        in.close();
-
-        bubbleSort(list);
-
-        System.out.println(list);
-
     }
 
-    private static void bubbleSort(List<Integer> list) {
-        int temp;
-        for(int i = 0; i < list.size(); i ++) {
-            for(int j = 0 ; j < list.size() - i - 1; j++) {
-                if(list.get(j) > list.get(j+1)) {
-                    temp = list.get(j);
-                    list.set(j, list.get(j+1));
-                    list.set(j+1, temp);
+    private void sort(int[] a, int n) {
+        if (n == 1) {
+            return;
+        }
+        for (int i = 0; i < n; i++) {
+            boolean flag = false;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (a[j] > a[j + 1]) {
+                    int temp;
+                    temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                    flag = true;
                 }
+            }
+            if (!flag) {
+                break;
             }
         }
     }
+
+
 }

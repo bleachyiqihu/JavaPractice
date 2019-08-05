@@ -33,24 +33,26 @@ public class Chapter01 {
     private String postArticles(Jedis conn, String title, String author, String link) {
         String articleId = String.valueOf(conn.incr("article:"));
 
+        long now = System.currentTimeMillis() / 1000;
+
         String voted = "voted:" + articleId;
         conn.sadd(voted, author);
         conn.expire(voted, ONE_WEEK_IN_SECONDS);
 
         String article = "article:" + articleId;
-
-        long now = System.currentTimeMillis() / 1000;
         Map<String, String> articleData = new HashMap<>();
         articleData.put("title", title);
+        articleData.put("author", author);
         articleData.put("link", link);
-        articleData.put("user", author);
+        articleData.put("time", String.valueOf(now));
         articleData.put("votes", "1");
-        articleData.put("now", String.valueOf(now));
-        conn.hmset(article, articleData);
+
+        conn.hmset("article:" + articleId, articleData);
         conn.zadd("score:", now + VOTE_SCORE, article);
         conn.zadd("time:", now, article);
 
-        return article;
+        return articleId;
+
     }
 
     private void articleVote(Jedis conn, String user, String article) {
@@ -99,7 +101,7 @@ public class Chapter01 {
     }
 
     private List<Map<String, String>> getGroupArticles(Jedis conn, String group, int page, String order) {
-        String key = group + order;
+        String key = order + group;
 
         if (!conn.exists(key)) {
             ZParams zParams = new ZParams().aggregate(ZParams.Aggregate.MAX);

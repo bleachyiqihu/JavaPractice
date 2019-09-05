@@ -8,4 +8,6 @@ public interface Inf {
     default void say() {
         System.out.println("hello");
     }
+
+    // other change
 }

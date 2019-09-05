@@ -10,5 +10,7 @@ public class Main {
         System.out.println(Math.ceil(1.2));
 
         // do some change after folk from master
+
+        // this is a new change
     }
 }

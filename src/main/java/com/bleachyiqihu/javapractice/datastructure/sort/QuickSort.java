@@ -20,29 +20,29 @@ public class QuickSort {
     }
 
     private void sort(int[] a, int p, int r) {
-        if (p >= r) {
+        if(p >= r) {
             return;
         }
-        int mid = s(a, p, r);
-        sort(a, p, mid - 1);
-        sort(a, mid + 1, r);
+        int q = partition(a, p, r);
+        sort(a, p, q-1);
+        sort(a, q+1, r);
     }
 
-    private int s(int[] a, int p, int r) {
-        int temp;
-        int j = p, k = p;
-        for (; j < r; j++) {
-            if (a[j] < a[r]) {
-                temp = a[j];
-                a[j] = a[k];
-                a[k] = temp;
-                k++;
+    private int partition(int[] a, int p, int r) {
+
+        int i = p;
+        int pivot = a[r];
+        for(int j = p; j < a.length; j++) {
+            if(a[j] < pivot) {
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+                i += 1;
             }
         }
-        temp = a[r];
-        a[r] = a[k];
-        a[k] = temp;
-        return k;
+        a[r] = a[i];
+        a[i] = pivot;
+        return i;
     }
 
 

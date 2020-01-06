@@ -1,49 +1,50 @@
 package com.bleachyiqihu.javapractice.datastructure.sort;
 
-import java.util.Arrays;
-
 /**
- * 快速排序是一种平均复杂度O(nlogn)的算法，是一种原地排序算法，但是不稳定
- * 在最坏情况下（有序），复杂度为O(n^2)
- *
  * @Author wuguan
- * @Date 2019/8/28 3:03
+ * @Date 2020/1/6 12:03
  **/
 public class QuickSort {
-
     public static void main(String[] args) {
-        int[] a = {10, 5, 3, 7, 3};
         QuickSort quickSort = new QuickSort();
-        quickSort.sort(a, 0, a.length - 1);
-        System.out.println(Arrays.toString(a));
-
+        int[] array = {1, 5, 8, 4, 10, 9};
+        quickSort.sort(array);
+        for (int e : array) {
+            System.out.print(e);
+            System.out.print("\t");
+        }
     }
 
-    private void sort(int[] a, int p, int r) {
-        if (p >= r) {
+    private void sort(int[] array) {
+        if (array == null || array.length == 0) {
             return;
         }
-        int mid = s(a, p, r);
-        sort(a, p, mid - 1);
-        sort(a, mid + 1, r);
+        sort(array, 0, array.length - 1);
     }
 
-    private int s(int[] a, int p, int r) {
-        int temp;
-        int j = p, k = p;
-        for (; j < r; j++) {
-            if (a[j] < a[r]) {
-                temp = a[j];
-                a[j] = a[k];
-                a[k] = temp;
-                k++;
+    private void sort(int[] array, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int p = partition(array, start, end);
+        sort(array, start, p - 1);
+        sort(array, p + 1, end);
+    }
+
+    private int partition(int[] array, int start, int end) {
+        int p = array[end];
+        int i = start;
+        for (int j = start; j < end; j++) {
+            if (array[j] < p) {
+                int tmp = array[i];
+                array[i] = array[j];
+                array[j] = tmp;
+                i++;
             }
         }
-        temp = a[r];
-        a[r] = a[k];
-        a[k] = temp;
-        return k;
+        array[end] = array[i];
+        array[i] = p;
+        return i;
     }
-
 
 }

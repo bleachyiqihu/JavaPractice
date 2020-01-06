@@ -2,58 +2,59 @@ package com.bleachyiqihu.javapractice.datastructure.sort;
 
 /**
  * @Author wuguan
- * @Date 2019/7/23 11:11
+ * @Date 2020/1/6 17:24
  **/
 public class MergeSort {
-
     public static void main(String[] args) {
         MergeSort mergeSort = new MergeSort();
-        int[] a = {1, 3, 4, 5, 7, 2};
-        System.out.println(mergeSort.count(a, a.length));
-        for(int num: a) {
-            System.out.print(num + "\t");
+        int[] array = {1, 2, 9, 77, 5};
+        mergeSort.sort(array);
+        for (int e : array) {
+            System.out.print(e);
+            System.out.print("\t");
         }
     }
 
-    private int num = 0;
-
-    private int count(int[] a, int n) {
-        num = 0;
-        mergeSortCount(a, 0, n - 1);
-        return num;
-    }
-
-    private void mergeSortCount(int[] a, int p, int r) {
-        if (p < r) {
-            int q = (p + r) / 2;
-            mergeSortCount(a, p, q);
-            mergeSortCount(a, q + 1, r);
-            merge(a, p, q, r);
+    private void sort(int[] array) {
+        if (array == null || array.length == 0) {
+            return;
         }
+        sort(array, 0, array.length - 1);
     }
 
-    private void merge(int[] a, int p, int q, int r) {
-        int i = p;
-        int j = q + 1;
-        int[] temp = new int[r - p + 1];
-        int t = 0;
-        while (i <= q && j <= r) {
-            if (a[i] <= a[j]) {
-                temp[t++] = a[i++];
+    private void sort(int[] array, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int mid = (start + end) / 2;
+        sort(array, start, mid);
+        sort(array, mid + 1, end);
+        merge(array, start, mid, end);
+    }
+
+    private void merge(int[] array, int start, int mid, int end) {
+        int i = start;
+        int j = mid + 1;
+        int n = end - start + 1;
+        int[] tmp = new int[n];
+        int p = 0;
+        while (i <= mid && j <= end) {
+            if (array[i] <= array[j]) {
+                tmp[p++] = array[i++];
             } else {
-                num += q - i + 1;
-                temp[t++] = a[j++];
+                tmp[p++] = array[j++];
             }
         }
-        while (i <= q) {
-            temp[t++] = a[i++];
+        if (j <= end) {
+            while (j <= end) {
+                tmp[p++] = array[j++];
+            }
         }
-        while (j <= r) {
-            temp[t++] = a[j++];
+        if (i <= mid) {
+            while (i <= mid) {
+                tmp[p++] = array[i++];
+            }
         }
-        for (i = 0; i < r - p + 1; i++) {
-            a[p + i] = temp[i];
-        }
+        System.arraycopy(tmp, 0, array, start, n);
     }
-
 }
